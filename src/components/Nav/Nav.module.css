@@ -1,0 +1,58 @@
+.nav {
+  padding: 50px;
+  position: relative;
+}
+
+.nav .content {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: none;
+}
+
+.nav .content a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav .content a:hover {
+  color: rgb(95, 95, 95);
+}
+
+.nav .profile::before {
+  content: url("../../../img/profile.png");
+  position: absolute;
+  left: 10px;
+}
+
+.nav .msg::before {
+  content: url("../../../img/msg.png");
+  position: absolute;
+  left: 10px;
+  margin-bottom: 50px;
+}
+
+.nav .sett::before {
+  content: url("../../../img/settings.png");
+  position: absolute;
+  left: 10px;
+}
+
+.nav .news::before {
+  content: url("../../../img/news.png");
+  position: absolute;
+  left: 10px;
+}
+
+.nav .music::before {
+  content: url("../../../img/music.png");
+  position: absolute;
+  left: 10px;
+}
+
+.activeLink {
+  background-color: black;
+}
+

@@ -1,0 +1,30 @@
+.container {
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.messages {
+    width: 250px;
+}
+
+.message {
+    width: 70%;
+    height: 50px;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.person {
+    display: flex;
+}
