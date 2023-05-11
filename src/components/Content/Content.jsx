@@ -1,6 +1,7 @@
 import './Content.css';
 import Info from './Info';
 import Posts from './Post/Posts';
+import PostsContainer from './Post/PostsContainer';
 
 const Content = (props) => {
   debugger;
@@ -12,11 +13,7 @@ const Content = (props) => {
       />
       <div className="content-without-img">
         <Info/>
-        <Posts 
-          posts = {props.contentPage.posts} 
-          dispatch = {props.dispatch} 
-          NewPostText = {props.contentPage.NewPostText}
-        />
+        <PostsContainer store={props.store}/>
       </div>
     </div>
   );

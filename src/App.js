@@ -10,6 +10,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 
 function App(props) {
+  debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -17,9 +18,7 @@ function App(props) {
         <Nav />
         <Routes>
           <Route path='/content/*'
-            element={<Content
-              contentPage={props.state.contentPage}
-              dispatch={props.dispatch} />} />
+            element={<Content store={props.store} />} />
           <Route path='/messages/*'
             element={<Messages
               messagePage={props.state.messagePage}

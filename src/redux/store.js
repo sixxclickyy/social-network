@@ -3,15 +3,6 @@ import messageReduser from "./messageReduser";
 import sidebarReduser from "./sedibarReduser";
 
 let store = {
-
-    getState() {
-        return this._state;
-    },
-
-    _Index() {
-        console.log("changed")
-    },
-
     _state: {
         contentPage: {
             posts:
@@ -42,50 +33,30 @@ let store = {
         sidebar: {}
     },
 
-    addPost() {
-        debugger;
-        let newPost = {
-            id: "5",
-            posts: this._state.contentPage.NewPostText,
-            like: "18"
-        }
-        this._state.contentPage.posts.push(newPost);
-        this._state.contentPage.NewPostText = "";
-        this.Index(this._state);
+    _callSubscriber() {
+        console.log('State changed');
     },
 
-    addNewMessage() {
-        let newMessage = {
-            id: 5,
-            text: this._state.messagePage.newMessageText
-        }
-
-        this._state.messagePage.messages.push(newMessage);
-        this._state.messagePage.newMessageText = "";
-        this.Index(this._state);
+    getState() {
+        return this._state;
     },
 
-    ChangeMessageInputText(text) {
-        this._state.messagePage.newMessageText = text;
-        this.Index(this._state);
-    },
-
-    ChangeInputText(text) {
-        this._state.contentPage.NewPostText = text;
-        this.Index(this._state);
+    _Index() {
+        console.log("changed")
     },
 
     subscribe(observer) {
-        this.Index = observer;
+        this._callSubscriber = observer;
     },
 
     dispatch(action) {
         this._state.contentPage = contentReduser(this._state.contentPage, action);
         this._state.messagePage = messageReduser(this._state.messagePage, action);
-        this._state.sidebar = sidebarReduser(this._state.sidebar);
+        this._state.sidebar = sidebarReduser(this._state.sidebar, action);
 
-        this.Index(this._state, action);
+        this._callSubscriber(this._state);
     }
 }
 
 export default store;
+window.store = store;

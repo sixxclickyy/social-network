@@ -8,12 +8,12 @@ const Posts = (props) => {
 
   let newPost = React.createRef();
   let AddPost = () => { 
-    props.dispatch(addPosatActionCreator());
+    props.addPost();
   };
 
   let onChange = () => {
     let text = newPost.current.value;
-    props.dispatch(onChangeActionCreator(text));
+    props.ChangeInputText(text);
   }
   return (
     <div>
