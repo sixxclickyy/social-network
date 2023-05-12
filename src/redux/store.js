@@ -41,10 +41,6 @@ let store = {
         return this._state;
     },
 
-    _Index() {
-        console.log("changed")
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer;
     },

@@ -8,9 +8,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
+import MessagesContainer from './components/Messages/MessagesContainer';
 
 function App(props) {
-  debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -20,9 +20,7 @@ function App(props) {
           <Route path='/content/*'
             element={<Content store={props.store} />} />
           <Route path='/messages/*'
-            element={<Messages
-              messagePage={props.state.messagePage}
-              dispatch={props.dispatch}/>} />
+            element={<MessagesContainer store={props.store}/>} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
