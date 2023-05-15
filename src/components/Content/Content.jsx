@@ -3,7 +3,7 @@ import Info from './Info';
 import Posts from './Post/Posts';
 import PostsContainer from './Post/PostsContainer';
 
-const Content = (props) => {
+const Content = () => {
   debugger;
   return (
     <div className="content">
@@ -13,7 +13,7 @@ const Content = (props) => {
       />
       <div className="content-without-img">
         <Info/>
-        <PostsContainer store={props.store}/>
+        <PostsContainer/>
       </div>
     </div>
   );

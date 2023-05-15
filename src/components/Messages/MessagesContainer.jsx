@@ -1,23 +1,30 @@
-import { NavLink } from "react-router-dom";
-import styles from "./Message.module.css";
-import React from "react";
-import { addMessageActionCreator, onChangeMessageActionCreator } from '../../redux/messageReduser';
+import {
+  addMessageActionCreator,
+  onChangeMessageActionCreator,
+} from "../../redux/messageReduser";
 import Messages from "./Messages";
+import { connect } from "react-redux";
 
-const MessagesContainer = (props) => {
-  let state = props.store.getState().messagePage;
-
-  let MessagePost = () => {
-    props.store.dispatch(addMessageActionCreator());
+let mapStateToProps = (state) => {
+  return {
+    messagePage: state.messagePage,
   };
-
-  let onChange = (text) => {
-    props.store.dispatch(onChangeMessageActionCreator(text));
-  }
-
-  return (
-    <Messages newPostMessage={MessagePost} onChange={onChange} messagePage={state}/>
-  );
 };
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    newPostMessage: () => {
+      dispatch(addMessageActionCreator());
+    },
+    onChange: (text) => {
+      dispatch(onChangeMessageActionCreator(text));
+    },
+  };
+};
+
+const MessagesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Messages);
 
 export default MessagesContainer;

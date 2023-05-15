@@ -1,23 +1,30 @@
 import React from "react";
-import Post from "./Post";
-import { NavLink } from "react-router-dom";
-import { addPosatActionCreator, onChangeActionCreator } from '../../../redux/contentReduser';
 import Posts from "./Posts";
+import { NavLink } from "react-router-dom";
+import {
+  addPosatActionCreator,
+  onChangeActionCreator,
+} from "../../../redux/contentReduser";
+import {connect} from "react-redux";
 
-const PostsContainer = (props) => {
-    debugger;
-    let state = props.store.getState();
-  let AddPost = () => { 
-    props.store.dispatch(addPosatActionCreator());
+let mapStateToProps = (state) => {
+  return {
+    posts: state.contentPage.posts,
+    NewPostText: state.contentPage.NewPostText  
   };
-
-  let onChange = (text) => {
-    let action = onChangeActionCreator(text);
-    props.store.dispatch(action);
-  }
-  return (
-    <Posts ChangeInputText={onChange} addPost={AddPost} posts={state.contentPage.posts} NewPostText={state.contentPage.NewPostText}/>
-  );
 };
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => {
+      dispatch(addPosatActionCreator());
+    },
+    ChangeInputText: (text) => {
+      dispatch(onChangeActionCreator(text));
+    },
+  };
+};
+
+const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
 export default PostsContainer;

@@ -12,29 +12,33 @@ let defaultData =
 
 const contentReduser = (state = defaultData, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {
                 id: "5",
                 posts: state.NewPostText,
                 like: "18"
             }
-            state.posts.push(newPost);
-            state.NewPostText = "";
-            return state;
-
-        case CHANGE_INPUT_TEXT:
-            state.NewPostText = action.text;
-            return state;
+            let stateCopy = {...state}; 
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts.push(newPost);
+            stateCopy.NewPostText = "";
+            return stateCopy;
+        }
+        case CHANGE_INPUT_TEXT: {
+            let stateCopy = {...state}; 
+            stateCopy.posts = [...state.posts];
+            stateCopy.NewPostText = action.text;
+            return stateCopy;
+        }
         default:
             return state;
     }
 }
 
-export default contentReduser;
-
 export const addPosatActionCreator = () => ({ type: ADD_POST })
-
 export const onChangeActionCreator = (text) => ({
     type: CHANGE_INPUT_TEXT,
     text: text
 })
+
+export default contentReduser;

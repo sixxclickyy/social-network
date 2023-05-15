@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 import { addPosatActionCreator, onChangeActionCreator } from '../../../redux/contentReduser';
 
 const Posts = (props) => {
-  let newPosts = props.posts.map((p) => <Post posts={p.posts} like={p.like} />);
+  let newPosts = props.posts.map((p) => <Post posts={p.posts} like={p.like} key={p.id}/>);
 
   let newPost = React.createRef();
-  let AddPost = () => { 
+  let onAddPost = () => { 
     props.addPost();
   };
 
@@ -35,7 +35,7 @@ const Posts = (props) => {
                 type="submit"
                 className="submit"
                 value="Send"
-                onClick={AddPost}
+                onClick={onAddPost}
               ></input>
             </NavLink>
           </div>

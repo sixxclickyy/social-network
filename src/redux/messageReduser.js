@@ -19,17 +19,24 @@ let defaultData = {
 
 const messageReduser = (state = defaultData, action) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             let newMessage = {
                 id: "5",
                 text: state.newMessageText
             }
-            state.messages.push(newMessage);
-            state.newMessageText = "";
-            return state;
+            let newCopyState = { ...state };
+            newCopyState.messages = [...state.messages];
+            newCopyState.messages.push(newMessage);
+            newCopyState.newMessageText = "";
+            return newCopyState;
+        }
         case CHANGE_MESSAGE_INPUT_TEXT:
-            state.newMessageText = action.text;
-            return state;
+            {
+                let newCopyState = { ...state };
+                newCopyState.newMessageText = [...state.newMessageText]
+                newCopyState.newMessageText = action.text;
+                return newCopyState;
+            }
         default:
             return state;
     }

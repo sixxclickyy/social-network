@@ -18,9 +18,9 @@ function App(props) {
         <Nav />
         <Routes>
           <Route path='/content/*'
-            element={<Content store={props.store} />} />
+            element={<Content/>} />
           <Route path='/messages/*'
-            element={<MessagesContainer store={props.store}/>} />
+            element={<MessagesContainer/>} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
@@ -29,5 +29,5 @@ function App(props) {
     </BrowserRouter>
   );
 }
-//..
+
 export default App;

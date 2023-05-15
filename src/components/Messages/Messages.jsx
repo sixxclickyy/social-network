@@ -7,8 +7,8 @@ const Messages = (props) => {
   debugger;
   let state = props.messagePage;
 
-  let newMessages = state.messages.map((m) => <Person text={m.text} />);
-  let newPeops = state.people.map((p) => <MessageItem name={p.name} id={p.id} />);
+  let newMessages = state.messages.map((m) => <Person text={m.text} key={m.id} />);
+  let newPeops = state.people.map((p) => <MessageItem name={p.name} id={p.id} key={p.id}/>);
 
   let newMessageText = state.newMessageText;
 
@@ -19,7 +19,6 @@ const Messages = (props) => {
   let onChange = (e) => {
     let text = e.target.value;
     props.onChange(text)
-
   }
 
   return (

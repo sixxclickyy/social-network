@@ -9,6 +9,7 @@ let reducers = combineReducers({
     sidebar: sidebarReduser
 })
 
-let store = legacy_createStore(reducers)
+let store = legacy_createStore(reducers);
+window.store = store;
 
 export default store;
