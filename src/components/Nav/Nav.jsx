@@ -30,6 +30,11 @@ const Nav = () => {
             Settings
           </NavLink>
         </div>
+        <div>
+          <NavLink to="/friends" className={styles.sett} activeClassName={styles.activeLink}>
+            Friends
+          </NavLink>
+        </div>
       </div>
     </nav>
   );

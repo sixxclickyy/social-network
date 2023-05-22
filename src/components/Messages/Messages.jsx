@@ -4,7 +4,6 @@ import MessageItem from "./MessageItem";
 import Person from "./Person";
 
 const Messages = (props) => {
-  debugger;
   let state = props.messagePage;
 
   let newMessages = state.messages.map((m) => <Person text={m.text} key={m.id} />);

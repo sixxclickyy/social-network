@@ -4,7 +4,6 @@ import Posts from './Post/Posts';
 import PostsContainer from './Post/PostsContainer';
 
 const Content = () => {
-  debugger;
   return (
     <div className="content">
       <img
