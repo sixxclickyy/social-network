@@ -13,19 +13,11 @@ const Friends = (props) => {
   return (
     <div className={style.friendsContainer}>
       <div>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p && style.selectedPage}
-              onClick={(e) => {
-                props.onChangedPage(p);
-              }}
-            >
-              {p}
-            </span>
-          );
-        })}
+            {pages.map((p) => {
+                return <span className={props.currentPage === p ? style.selectedPage : ""} onClick={() => {props.onChangedPage(p)}}>{p}</span>;
+            })}
       </div>
+
       {props.users.map((u) => (
         <div key={u.id}>
           <div>

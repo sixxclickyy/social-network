@@ -2,13 +2,12 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const CURRENT_PAGE = 'CURRENT_PAGE';
-const SET_TOTAL_FRIENDS_COUNT = 'SET_TOTAL_FRIENDS_COUNT';
-
+const SET_TOTAL_FRIENDS = 'SET_TOTAL_FRIENDS';
 
 let defaultData = {
     users: [],
     pageSize: 5,
-    totalFriendsCount: 100,
+    totalFriendsCount: 20,
     currentPage: 1
 }
 
@@ -38,9 +37,8 @@ const friendReduser = (state = defaultData, action) => {
             return { ...state, users: action.users }
         case CURRENT_PAGE:
             return { ...state, currentPage: action.currentPage }
-        case SET_TOTAL_FRIENDS_COUNT: {
-            return { ...state, totalFriendsCount: action.count }
-        }
+        case SET_TOTAL_FRIENDS:
+            return { ...state, totalFriends: action.count }
         default:
             return state;
     }
@@ -49,7 +47,9 @@ const friendReduser = (state = defaultData, action) => {
 export const followActionCreator = (userId) => ({ type: FOLLOW, userId })
 export const unfollowActionCreator = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsersActionCreator = (users) => ({ type: SET_USERS, users })
-export const currentPageActionCreator = (currentPage) => ({ type: CURRENT_PAGE, currentPage })
-export const setFriendsTotalCountAC = (totalFriendsCount) => ({ type: SET_TOTAL_FRIENDS_COUNT, count: totalFriendsCount })
+export const setCurrentPageAC = (currentPage) => ({ type: CURRENT_PAGE, currentPage })
+export const setTotalFriendsAC = (totalFriends) => ({ type: SET_TOTAL_FRIENDS, count: totalFriends })
+// export const currentPageActionCreator = (currentPage) => ({ type: CURRENT_PAGE, currentPage })
+// export const setFriendsTotalCountAC = (totalFriendsCount) => ({ type: SET_TOTAL_FRIENDS_COUNT, count: totalFriendsCount })
 
 export default friendReduser;

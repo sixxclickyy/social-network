@@ -3,8 +3,8 @@ import {
   followActionCreator,
   unfollowActionCreator,
   setUsersActionCreator,
-  currentPageActionCreator,
-  setFriendsTotalCountAC,
+  setCurrentPageAC,
+  setTotalFriendsAC,
 } from "../../redux/friendsReduser";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -18,20 +18,23 @@ class FriendsContainer extends React.Component {
       )
       .then((response) => {
         this.props.setFriends(response.data.items);
-        this.props.setFriendsTotalCountAC(response.data.totalCount);
+        this.props.setTotalFriends(response.data.totalCount)
       });
   }
 
-  onChangedPage(pageNumber) {
-    debugger;
-    this.props.setCurrentPage(pageNumber);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setFriends(response.data.items);
-      });
+  onChangedPage(page) {
+    try {
+      this.props.setCurrent(page);
+      axios
+        .get(
+          `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+        )
+        .then((response) => {
+          this.props.setFriends(response.data.items);
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
@@ -69,11 +72,11 @@ let mapDispatchToProps = (dispatch) => {
     setFriends: (users) => {
       dispatch(setUsersActionCreator(users));
     },
-    setCurrentPage: (pageNumber) => {
-      dispatch(currentPageActionCreator(pageNumber));
+    setCurrent: (users) => {
+      dispatch(setCurrentPageAC(users));
     },
-    setTotalFriendsCount: (totalCount) => {
-      dispatch(setFriendsTotalCountAC(totalCount));
+    setTotalFriends: (totalFriends) => {
+      dispatch(setTotalFriendsAC(totalFriends));
     },
   };
 };
