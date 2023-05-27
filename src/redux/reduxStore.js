@@ -5,7 +5,7 @@ import sidebarReduser from './sedibarReduser';
 import friendReduser from "./friendsReduser";
 
 let reducers = combineReducers({
-    contentPage: contentReduser,
+    profilePage: contentReduser,
     messagePage: messageReduser,
     sidebar: sidebarReduser,
     friendsPage: friendReduser

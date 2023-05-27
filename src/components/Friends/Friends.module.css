@@ -1,7 +1,64 @@
 .friendsContainer {
     height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 300px;
 }
 
 .selectedPage {
-    font-weight: bold;
+    font-size: 30px;
 }
+
+.selects:hover {
+    cursor: pointer;
+}
+
+.userPhoto {
+    width: 50%;
+}
+
+.users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blubtn {
+
+}
+
+a.blubtn {
+    width:200px;
+    text-align:center;
+    /* display:block; */
+    font-family: arial;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 14px;
+    border: #1071FF 1px solid;
+    color: #1071FF;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+     margin: 20px auto;
+    transition: .5s;
+    border-radius: 0px;
+  }
+  a.blubtn:hover {
+    top: 5px;
+    transition: .5s;
+    color: #10FF58;
+    border: #10FF58 1px solid;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  a.blubtn:active {
+    color: #000;
+    border: #1A1A1A 1px solid;
+    transition: .07s;
+    background-color: #FFF;
+  }

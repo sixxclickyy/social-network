@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_INPUT_TEXT = 'CHANGE-INPUT-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
 let defaultData =
 {
     posts:
@@ -7,7 +9,8 @@ let defaultData =
         { id: "2", posts: "My first post", like: "40" },
         { id: "3", posts: "I like bananas", like: "12" }],
 
-    NewPostText: "hello! write something"
+    NewPostText: "hello! write something",
+    profile: null
 };
 
 const contentReduser = (state = defaultData, action) => {
@@ -30,12 +33,16 @@ const contentReduser = (state = defaultData, action) => {
             stateCopy.NewPostText = action.text;
             return stateCopy;
         }
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
+        }
         default:
             return state;
     }
 }
 
 export const addPosatActionCreator = () => ({ type: ADD_POST })
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const onChangeActionCreator = (text) => ({
     type: CHANGE_INPUT_TEXT,
     text: text
