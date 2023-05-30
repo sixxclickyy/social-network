@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Friends.module.css";
 import userPhoto from "../../images/avatarka.png";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Friends = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -39,7 +40,7 @@ const Friends = (props) => {
             <NavLink to={"/profile/" + u.id}>
               <div className={style.users}>
                 <img
-                className={style.userPhoto}
+                  className={style.userPhoto}
                   src={u.photos.small != null ? u.photos.small : userPhoto}
                   alt=""
                 />
@@ -49,17 +50,47 @@ const Friends = (props) => {
             <div>{u.status}</div>
           </div>
           {u.followed ? (
-            <a className={style.blubtn}
+            <a
+              className={style.blubtn}
               onClick={() => {
-                props.unfollow(u.id);
+                axios
+                  .delete(
+                    `https://social-network.samuraijs.com/api/1.0/follow/` + u.id,
+                    {
+                      withCredentials: true,
+                      headers: {
+                        "API-KEY": "5ee15a04-4613-4dba-beda-ecea20fa17af"
+                      }
+                    }
+                  )
+                  .then((response) => {
+                    if (response.data.resultCode === 0) {
+                      props.unfollow(u.id);
+                    }
+                  });
               }}
             >
               Unfollow
             </a>
           ) : (
-            <a className={style.blubtn}
+            <a
+              className={style.blubtn}
               onClick={() => {
-                props.follow(u.id);
+                axios
+                  .post(
+                    `https://social-network.samuraijs.com/api/1.0/follow/` + u.id, {},
+                    {
+                      withCredentials: true,
+                      headers: {
+                        "API-KEY": "5ee15a04-4613-4dba-beda-ecea20fa17af"
+                      }
+                    }
+                  )
+                  .then((response) => {
+                    if (response.data.resultCode === 0) {
+                      props.follow(u.id);
+                    }
+                  });
               }}
             >
               Follow

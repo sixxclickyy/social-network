@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
@@ -9,12 +8,13 @@ import Settings from './components/Settings/Settings';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import ContentContainer from './components/Content/ContentContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Nav />
         <Routes>
           {/* <Route path='/profile/*'

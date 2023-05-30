@@ -11,31 +11,27 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Friends from "./Friends.jsx";
 import Preloader from "../Preloader/Preloader";
+import { usersAPI } from "../../api/api";
 
 class FriendsContainer extends React.Component {
   componentDidMount() {
     this.props.isFecthingLoader(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
+    
+      usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.isFecthingLoader(false);
-        this.props.setFriends(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setFriends(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
 
   onChangedPage = (page) => {
     this.props.setCurrent(page);
     this.props.isFecthingLoader(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
+      usersAPI.getUsers(page, this.props.pageSize)
+      .then((data) => {
         this.props.isFecthingLoader(false);
-        this.props.setFriends(response.data.items);
+        this.props.setFriends(data.items);
       });
   };
 

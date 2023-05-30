@@ -27,10 +27,6 @@
     align-items: center;
 }
 
-.blubtn {
-
-}
-
 a.blubtn {
     width:200px;
     text-align:center;
@@ -49,12 +45,12 @@ a.blubtn {
     border-radius: 0px;
   }
   a.blubtn:hover {
+    cursor: pointer;
     top: 5px;
     transition: .5s;
     color: #10FF58;
     border: #10FF58 1px solid;
     border-radius: 10px;
-    cursor: pointer;
   }
   a.blubtn:active {
     color: #000;
