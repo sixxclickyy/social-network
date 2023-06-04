@@ -9,6 +9,7 @@ import MessagesContainer from './components/Messages/MessagesContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import ContentContainer from './components/Content/ContentContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Auth from './components/Auth/Auth';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/login' element={<Auth />} />
         </Routes>
       </div>
     </BrowserRouter>

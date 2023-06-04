@@ -1,9 +1,12 @@
+import { Navigate } from "react-router-dom";
 import {
   addMessageActionCreator,
   onChangeMessageActionCreator,
 } from "../../redux/messageReduser";
 import Messages from "./Messages";
 import { connect } from "react-redux";
+import { AuthRedirect } from "../../HOC/AuthRedirect"
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -22,9 +25,7 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-const MessagesContainer = connect(
+export default compose (connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps), AuthRedirect
 )(Messages);
-
-export default MessagesContainer;

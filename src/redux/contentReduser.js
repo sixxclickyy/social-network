@@ -1,6 +1,9 @@
+import { contentAPI, usersAPI } from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const CHANGE_INPUT_TEXT = 'CHANGE-INPUT-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 let defaultData =
 {
@@ -10,7 +13,8 @@ let defaultData =
         { id: "3", posts: "I like bananas", like: "12" }],
 
     NewPostText: "hello! write something",
-    profile: null
+    profile: null,
+    status: ""
 };
 
 const contentReduser = (state = defaultData, action) => {
@@ -36,6 +40,9 @@ const contentReduser = (state = defaultData, action) => {
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
+        case SET_USER_STATUS: {
+            return {...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -47,5 +54,33 @@ export const onChangeActionCreator = (text) => ({
     type: CHANGE_INPUT_TEXT,
     text: text
 })
+export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
+
+export const userProfileThunk = (userId) => {
+    return (dispatch) => {
+        usersAPI.userProfile(userId)
+      .then((response) => {
+        dispatch(setUserProfile(response.data));
+      });
+    }
+}
+
+export const getUserStatus = (status) => (dispatch) => {
+        contentAPI.getStatus(status)
+      .then((response) => {
+        dispatch(setUserStatus(response.data));
+      });
+}
+
+
+export const UpdateUserStatus = (status) => (dispatch) => {
+        contentAPI.updateStatus(status)
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
+      });
+    
+}
 
 export default contentReduser;

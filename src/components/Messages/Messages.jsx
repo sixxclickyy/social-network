@@ -2,8 +2,11 @@ import styles from "./Message.module.css";
 import React from "react";
 import MessageItem from "./MessageItem";
 import Person from "./Person";
+import { Navigate } from "react-router-dom";
 
 const Messages = (props) => {
+  if(!props.isAuth) return <Navigate to={'/login'}/>
+
   let state = props.messagePage;
 
   let newMessages = state.messages.map((m) => <Person text={m.text} key={m.id} />);

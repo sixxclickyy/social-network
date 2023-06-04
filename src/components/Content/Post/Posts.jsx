@@ -1,6 +1,6 @@
 import React from "react";
 import Post from "./Post";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { addPosatActionCreator, onChangeActionCreator } from '../../../redux/contentReduser';
 
 const Posts = (props) => {

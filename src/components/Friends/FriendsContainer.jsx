@@ -2,37 +2,23 @@ import React from "react";
 import {
   follow,
   unfollow,
-  setFriends,
   setCurrent,
-  setTotalUsersCount,
-  isFecthingLoader,
+  toggleFollowingProgress,
+  getFriendsThunk
 } from "../../redux/friendsReduser";
 import { connect } from "react-redux";
-import axios from "axios";
 import Friends from "./Friends.jsx";
 import Preloader from "../Preloader/Preloader";
-import { usersAPI } from "../../api/api";
 
 class FriendsContainer extends React.Component {
   componentDidMount() {
-    this.props.isFecthingLoader(true);
-    
-      usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.isFecthingLoader(false);
-        this.props.setFriends(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
+   this.props.getFriendsThunk(this.props.currentPage, this.props.pageSize);
   }
 
   onChangedPage = (page) => {
     this.props.setCurrent(page);
-    this.props.isFecthingLoader(true);
-      usersAPI.getUsers(page, this.props.pageSize)
-      .then((data) => {
-        this.props.isFecthingLoader(false);
-        this.props.setFriends(data.items);
-      });
+    this.props.getFriendsThunk(page, this.props.pageSize);
+
   };
 
   render() {
@@ -49,6 +35,7 @@ class FriendsContainer extends React.Component {
             onChangedPage={this.onChangedPage}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
+            followingInProgress={this.props.followingInProgress}
           />
         )}
       </>
@@ -63,41 +50,14 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.friendsPage.totalUsersCount,
     currentPage: state.friendsPage.currentPage,
     isFetching: state.friendsPage.isFetching,
+    followingInProgress: state.friendsPage.followingInProgress
   };
 };
 
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     follow: (usersId) => {
-//       dispatch(followActionCreator(usersId));
-//     },
-//     unfollow: (usersId) => {
-//       dispatch(unfollowActionCreator(usersId));
-//     },
-//     setFriends: (users) => {
-//       dispatch(setUsersActionCreator(users));
-//     },
-//     setCurrent: (users) => {
-//       dispatch(setCurrentPageAC(users));
-//     },
-//     setTotalUsersCount: (totalCount) => {
-//       dispatch(setUsersTotalCountAC(totalCount));
-//     },
-//     isFecthingLoader: (isFetching) => {
-//       dispatch(isFecthingLoaderAC(isFetching));
-//     },
-//   };
-// };
-
-export default connect(
-  mapStateToProps,
-  {
+export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setFriends,
   setCurrent,
-  setTotalUsersCount,
-  isFecthingLoader}
-)(FriendsContainer);
-
-
+  toggleFollowingProgress,
+  getFriendsThunk
+})(FriendsContainer);

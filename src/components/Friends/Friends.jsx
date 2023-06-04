@@ -2,7 +2,6 @@ import React from "react";
 import style from "./Friends.module.css";
 import userPhoto from "../../images/avatarka.png";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 
 const Friends = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -52,46 +51,16 @@ const Friends = (props) => {
           {u.followed ? (
             <a
               className={style.blubtn}
-              onClick={() => {
-                axios
-                  .delete(
-                    `https://social-network.samuraijs.com/api/1.0/follow/` + u.id,
-                    {
-                      withCredentials: true,
-                      headers: {
-                        "API-KEY": "5ee15a04-4613-4dba-beda-ecea20fa17af"
-                      }
-                    }
-                  )
-                  .then((response) => {
-                    if (response.data.resultCode === 0) {
-                      props.unfollow(u.id);
-                    }
-                  });
-              }}
+              disabled={props.followingInProgress.some((id) => id === u.id)}
+              onClick={() => { props.unfollow(u.id); }}
             >
               Unfollow
             </a>
           ) : (
             <a
               className={style.blubtn}
-              onClick={() => {
-                axios
-                  .post(
-                    `https://social-network.samuraijs.com/api/1.0/follow/` + u.id, {},
-                    {
-                      withCredentials: true,
-                      headers: {
-                        "API-KEY": "5ee15a04-4613-4dba-beda-ecea20fa17af"
-                      }
-                    }
-                  )
-                  .then((response) => {
-                    if (response.data.resultCode === 0) {
-                      props.follow(u.id);
-                    }
-                  });
-              }}
+              disabled={props.followingInProgress.some((id) => id === u.id)}
+              onClick={() => { props.follow(u.id); }}
             >
               Follow
             </a>
