@@ -13,8 +13,6 @@ let defaultData = {
         { id: 3, name: "Natalia" },
         { id: 4, name: "Maria" },
         ],
-
-    newMessageText: "Hello! Write a message"
 }
 
 const messageReduser = (state = defaultData, action) => {
@@ -22,12 +20,11 @@ const messageReduser = (state = defaultData, action) => {
         case ADD_MESSAGE: {
             let newMessage = {
                 id: "5",
-                text: state.newMessageText
+                text: action.newMessageText
             }
             let newCopyState = { ...state };
             newCopyState.messages = [...state.messages];
             newCopyState.messages.push(newMessage);
-            newCopyState.newMessageText = "";
             return newCopyState;
         }
         case CHANGE_MESSAGE_INPUT_TEXT:
@@ -42,7 +39,7 @@ const messageReduser = (state = defaultData, action) => {
     }
 }
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE })
+export const addMessageActionCreator = (newMessageBody) => ({ type: ADD_MESSAGE, newMessageBody })
 
 export const onChangeMessageActionCreator = (text) => ({
     type: CHANGE_MESSAGE_INPUT_TEXT,

@@ -16,8 +16,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    newPostMessage: () => {
-      dispatch(addMessageActionCreator());
+    newPostMessage: (newMessageBody) => {
+      dispatch(addMessageActionCreator(newMessageBody));
     },
     onChange: (text) => {
       dispatch(onChangeMessageActionCreator(text));
@@ -27,5 +27,5 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose (connect(
   mapStateToProps,
-  mapDispatchToProps), AuthRedirect
+  mapDispatchToProps),  //AuthRedirect
 )(Messages);

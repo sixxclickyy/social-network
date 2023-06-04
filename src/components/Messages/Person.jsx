@@ -5,9 +5,8 @@ const Person = (props) => {
     <div className={styles.item}>
       <div className={styles.person}>
         <img src="" alt="" />
-        <span>Timur</span>
       </div>
-      <div className={styles.message}>{props.text}</div>
+      <div className={styles.message}>{props.item}</div>
     </div>
   );
 };

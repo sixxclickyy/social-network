@@ -5,13 +5,15 @@ import sidebarReduser from './sedibarReduser';
 import friendReduser from "./friendsReduser";
 import authReduser from "./authReduser";
 import thunkMiddleware from "redux-thunk"
+import formReduser from "./formReduser";
 
 let reducers = combineReducers({
     profilePage: contentReduser,
     messagePage: messageReduser,
     sidebar: sidebarReduser,
     friendsPage: friendReduser,
-    auth: authReduser
+    auth: authReduser,
+    form: formReduser
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));

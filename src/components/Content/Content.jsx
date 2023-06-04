@@ -5,7 +5,6 @@ import PostsContainer from './Post/PostsContainer';
 import React from 'react';
 
 const Content = (props) => {
-  debugger
   return (
     <div className="content">
       {/* <img

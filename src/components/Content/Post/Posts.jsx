@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "./Post";
-import { NavLink, Navigate } from "react-router-dom";
-import { addPosatActionCreator, onChangeActionCreator } from '../../../redux/contentReduser';
+import { Form, Formik, Field, useFormik } from "formik";
+import * as Yup from "yup";
 
 const Posts = (props) => {
   let newPosts = props.posts.map((p) => <Post posts={p.posts} like={p.like} key={p.id}/>);
@@ -21,23 +21,9 @@ const Posts = (props) => {
         <form action="post" className="form-posts">
           <h3>My posts</h3>
           <div className="post-submit">
-            <input
-              type="text"
-              className="posts"
-              name="posts"
-              placeholder="What's new do you have?"
-              ref={newPost}
-              value={props.NewPostText}
-              onChange={onChange}
-            />
-            <NavLink to="/content">
-              <input
-                type="submit"
-                className="submit"
-                value="Send"
-                onClick={onAddPost}
-              ></input>
-            </NavLink>
+           
+
+            <ValidationSchemaExample/>
           </div>
         </form>
       </div>
@@ -45,5 +31,40 @@ const Posts = (props) => {
     </div>
   );
 };
+
+const SignupSchema = Yup.object().shape({
+  text: Yup.string()
+    .min(1, "You can't send empty message :)")
+    .max(2000, "Too long text! Max 2000 symbols")
+    .required("You can't send empty message :)"),
+});
+
+export const ValidationSchemaExample = (props) => (
+  <div className="container">
+    <Formik
+      initialValues={{
+        text: "",
+      }}
+      validationSchema={SignupSchema}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+      >
+      {({ errors, touched }) => (
+        <Form className="formContainer">
+          <Field
+            name="text"
+            type="text"
+            className="posts"
+            placeholder="Write a message..."
+          />
+          {errors.text && touched.text ? <div>{errors.text}</div> : null}
+
+          <button type="submit" className="submit">Submit</button>
+        </Form>
+      )}
+    </Formik>
+  </div>
+);
 
 export default Posts;
